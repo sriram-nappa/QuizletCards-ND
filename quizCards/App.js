@@ -6,6 +6,7 @@ import { Constants } from 'expo';
 import { lightPurp, blue } from './styles/colors';
 import configureStore from './store';
 import initState from './utils/initialState';
+import AppNavigator from './utils/navigator';
 
 const store = configureStore(initState)
 
@@ -24,7 +25,7 @@ export default class App extends Component {
       <Provider store={store}>  
         <View style={styles.container}>
           <AppStatusBar backgroundColor={lightPurp} barStyle="light-content"/>
-          <Text>Lets begin</Text>
+          <AppNavigator/>
         </View>
       </Provider>
     );
