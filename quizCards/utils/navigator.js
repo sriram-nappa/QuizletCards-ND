@@ -2,10 +2,10 @@ import React from 'react';
 import { TabNavigator, StackNavigator, TabBarBottom } from 'react-navigation';
 import { Text, View, Platform } from 'react-native';
 import { Icon } from 'react-native-elements'
-import { lightPurp, white, shadowColor } from '../styles/colors';
-
+import { lightPurp, white, black, blue, shadowColor } from '../styles/colors';
 
 import DecksView from '../components/DecksView';
+import AddDeck from '../components/AddDeck';
 
 const Tabs = TabNavigator(
     {
@@ -13,7 +13,14 @@ const Tabs = TabNavigator(
             screen: DecksView,
             navigationOptions: {
                 tabBarLabel: 'Decks',
-                tabBarIcon: ({colorTag}) => <Icon name='archive' color={colorTag}/>,
+                tabBarIcon: ({tintColor}) => <Icon name='archive' size={25} color={tintColor}/>,
+            }
+        },
+        AddDeck: {
+            screen: AddDeck,
+            navigationOptions: {
+                tabBarLabel: 'Add Deck',
+                tabBarIcon: ({tintColor}) => <Icon name='playlist-add' size={30} color={tintColor}/>,
             }
         }
     },
@@ -22,7 +29,7 @@ const Tabs = TabNavigator(
           header: null
         },
         tabBarOptions: {
-          activeTintColor: Platform.OS === 'ios' ? lightPurp : white,
+          activeTintColor: Platform.OS === 'ios' ? black : white,
           style: {
             height: 64,
             backgroundColor: Platform.OS === 'ios' ? white : white,
