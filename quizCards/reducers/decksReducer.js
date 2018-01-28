@@ -17,12 +17,12 @@ const decks = (state = {}, action) => {
         ...action.payload.deck,
       }
     case ADD_CARD:
-      const questions = state[action.payload.deckId].questions || [];
+      const questions = state[action.payload.deckID].questions || [];
 
       return {
         ...state,
-        [action.payload.deckId]: {
-          ...state[action.payload.deckId],
+        [action.payload.deckID]: {
+          ...state[action.payload.deckID],
           questions: [
             ...questions,
             action.payload.card,

@@ -1,14 +1,54 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { connect } from 'react-redux';
+import { Text, View, FlatList, TouchableOpacity } from 'react-native';
+import { fetchDecks } from '../actions/decksActions';
 
 class DecksView extends Component {
-    render () {
+    componentDidMount() {
+        this.props.fetchDecks();
+    }
+    
+    _keyExtractor = (item, index) => item.id;
+
+    _renderItem = ({ item }) => {
+        const { decks } = this.props;
+    
         return (
-            <View>
-                <Text>Decks View</Text>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate(
+              'IndividualDeck',
+              { deckId: item, title: decks[item].title }
+            )}
+          >
+            {/* <Deck title={decks[item].title} questions={decks[item].questions} /> */}
+            "Deck Component"
+          </TouchableOpacity>
+        );
+    }
+
+    render () {
+        const { deckId, decks } = this.props;
+        console.log("Props" ,decks, deckId)
+        return (
+            <View style={{flex: 1}}>
+                <FlatList
+                    data={deckId}
+                    extraData={decks}
+                    renderItem={this._renderItem}
+                    keyExtractor={this._keyExtractor}
+                />
             </View>
         )
     }
 }
 
-export default DecksView;
+const mapStateToProps = ({ deckId, decks }) => {
+    return {
+      deckId,
+      decks,
+    }
+  };
+  
+export default connect(mapStateToProps, {
+    fetchDecks,
+})(DecksView);

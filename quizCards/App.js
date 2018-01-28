@@ -18,7 +18,6 @@ AppStatusBar = ({backgroundColor, ...props}) => {
   )
 }
 
-
 export default class App extends Component {
   render() {
     return (
