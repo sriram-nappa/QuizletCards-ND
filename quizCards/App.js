@@ -4,11 +4,9 @@ import { Provider } from 'react-redux';
 import { View, StatusBar, StyleSheet, Text } from 'react-native';
 import { Constants } from 'expo';
 import { lightPurp, blue } from './styles/colors';
-import configureStore from './store';
+import quizReducer from './reducers';
 import initState from './utils/initialState';
 import AppNavigator from './utils/navigator';
-
-const store = configureStore(initState)
 
 AppStatusBar = ({backgroundColor, ...props}) => {
   return (
@@ -20,8 +18,9 @@ AppStatusBar = ({backgroundColor, ...props}) => {
 
 export default class App extends Component {
   render() {
+    console.log(quizReducer)
     return (
-      <Provider store={store}>  
+      <Provider store={createStore(quizReducer)}>  
         <View style={styles.container}>
           <AppStatusBar backgroundColor={lightPurp} barStyle="light-content"/>
           <AppNavigator/>

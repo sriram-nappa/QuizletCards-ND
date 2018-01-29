@@ -1,69 +1,42 @@
 import { AsyncStorage } from 'react-native';
 import uuidv4 from 'uuid/v4';
+import {initState} from './initialState'
 
 const DECKS_STORAGE_KEY = 'QuizCards:decks';
 
-export const getDecks = () => {
-  return AsyncStorage
-    .getItem(DECKS_STORAGE_KEY)
-    .then((data) => JSON.parse(data));
+setDeckState = (decks) => {
+  return (decks) ? JSON.parse(decks) : initState
 }
 
-export const getDeck = () => {}
-
-export const saveDeckTitle = (title) => {
-  const key = uuidv4();
-  const deck = {
-    [key]: {
-      title,
-    },
-  };
-
-  return AsyncStorage
-    .mergeItem(
-      DECKS_STORAGE_KEY,
-      JSON.stringify(deck)
-    )
-    .then(() => deck);
+export function getDecks() {
+  return AsyncStorage.getItem(DECKS_STORAGE_KEY).then(setDeckState)
 }
 
-export const addCardToDeck = ({deckID, question, answer}) => {
-  const card = {
-    question,
-    answer,
-  };
-  const deck = {
-    [deckID]: {
-      questions: [
-        card,
-      ],
+export function getDeck(deckID) {
+  return getDecks().then((decks) => decks[deckID])
+}
+
+export function saveDeck(deckTitle) {
+  getDecks().then((decks) => {
+    if(!decks[deckTitle]) {
+      decks[deckTitle] = {
+        title: deckTitle,
+        questions: [],
+      }
+      AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decks))
     }
-  };
+  })
+}
 
-  return AsyncStorage
-    .getItem(DECKS_STORAGE_KEY)
-    .then((data) => JSON.parse(data))
-    .then((decks) => {
-      const questions = decks[deckID].questions || [];
+export function addCard(deckTitle, cardVal) {
+  getDecks().then((decks) => {
+    if(decks[deckTitle] && decks[deckTitle].questions) {
+      decks[deckTitle]['questions'].push(cardVal)
+    }
+    AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decks))
+  })
+}
 
-      const newDeck = {
-        [deckID]: {
-          ...decks[deckID],
-          questions: [
-            ...questions,
-            {
-              question,
-              answer,
-            }
-          ],
-        },
-      };
-
-      return AsyncStorage
-        .mergeItem(
-          DECKS_STORAGE_KEY,
-          JSON.stringify(newDeck),
-        )
-        .then(() => newDeck);
-    });
+export function clearStorage() {
+  AsyncStorage.setItem(DECKS_STORAGE_KEY, '')
 }

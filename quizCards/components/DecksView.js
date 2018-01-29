@@ -1,18 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Text, View, FlatList, TouchableOpacity } from 'react-native';
-import { fetchDecks } from '../actions/decksActions';
+import { getDecks } from '../utils/api';
+import { loadDecks } from '../actions';
+import { AppLoading } from 'expo'
 
 class DecksView extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            loading: true
+        }
+    }
+
     componentDidMount() {
-        this.props.fetchDecks();
+        getDecks().then((decks) => {
+            this.props.loadDecks(decks)
+        }).then(() => {
+            this.setState({
+                loading: false
+            })
+        })
     }
     
     _keyExtractor = (item, index) => item.id;
 
     _renderItem = ({ item }) => {
         const { decks } = this.props;
-    
+        console.log("Item",item)
         return (
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate(
@@ -20,35 +35,39 @@ class DecksView extends Component {
               { deckId: item, title: decks[item].title }
             )}
           >
+            <Text key={item}>Decks here</Text>
             {/* <Deck title={decks[item].title} questions={decks[item].questions} /> */}
-            "Deck Component"
           </TouchableOpacity>
         );
     }
 
     render () {
-        const { deckId, decks } = this.props;
-        console.log("Props" ,decks, deckId)
+        const { deckIds, decks } = this.props.decks;
         return (
             <View style={{flex: 1}}>
-                <FlatList
-                    data={deckId}
-                    extraData={decks}
-                    renderItem={this._renderItem}
-                    keyExtractor={this._keyExtractor}
-                />
+                {
+                (this.state.loading) ? 
+                    <AppLoading/> :
+                    <FlatList
+                        data={deckIds}
+                        extraData={decks}
+                        renderItem={this._renderItem}
+                        keyExtractor={this._keyExtractor}
+                    />
+                }
             </View>
         )
     }
 }
 
-const mapStateToProps = ({ deckId, decks }) => {
+const mapDispatchToProps = (dispatch)=>{
     return {
-      deckId,
-      decks,
+      loadDecks: (decks)=>dispatch(loadDecks(decks))
     }
-  };
+};
+
+const mapStateToProps = (decks) => {
+    return {decks}
+}
   
-export default connect(mapStateToProps, {
-    fetchDecks,
-})(DecksView);
+export default connect(mapStateToProps, mapDispatchToProps)(DecksView);

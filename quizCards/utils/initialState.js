@@ -1,5 +1,5 @@
 export const initState = {
-    deckID : ['React', 'JavaScript'],
+    deckIds : ['React', 'JavaScript'],
     decks : {
         React: {
           title: 'React',
