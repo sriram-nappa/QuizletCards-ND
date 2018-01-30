@@ -5,12 +5,15 @@ import { getDecks } from '../utils/api';
 import { loadDecks } from '../actions';
 import { AppLoading } from 'expo'
 
+import Deck from './Deck';
+
 class DecksView extends Component {
     constructor(props) {
         super(props)
         this.state = {
             loading: true
         }
+        this.deckEventHandler = this.deckEventHandler.bind(this)
     }
 
     componentDidMount() {
@@ -23,20 +26,20 @@ class DecksView extends Component {
         })
     }
     
-    _keyExtractor = (item, index) => item.id;
+    deckEventHandler = (decks, item) => {
+        this.props.navigation.navigate('DeckDetails', {deck : decks[item], title: item})
+    }
+
+    _keyExtractor = (item, index) => index;
 
     _renderItem = ({ item }) => {
-        const { decks } = this.props;
-        console.log("Item",item)
+        const { decks } = this.props.decks;
+        console.log("Item", decks)
         return (
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate(
-              'IndividualDeck',
-              { deckId: item, title: decks[item].title }
-            )}
+            onPress={() => this.deckEventHandler(decks, item)}
           >
-            <Text key={item}>Decks here</Text>
-            {/* <Deck title={decks[item].title} questions={decks[item].questions} /> */}
+            <Deck title={decks[item].title} questions={decks[item].questions} />
           </TouchableOpacity>
         );
     }
@@ -44,7 +47,7 @@ class DecksView extends Component {
     render () {
         const { deckIds, decks } = this.props.decks;
         return (
-            <View style={{flex: 1}}>
+            <View style={{flex: 1, marginTop: 15}}>
                 {
                 (this.state.loading) ? 
                     <AppLoading/> :

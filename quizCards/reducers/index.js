@@ -39,7 +39,6 @@ function quizReducer(state = {}, action) {
 
     default:
       {
-        console.log('ACtion', action)
         return state
       }
   }

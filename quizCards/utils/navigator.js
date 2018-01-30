@@ -6,6 +6,7 @@ import { lightPurp, white, black, blue, shadowColor } from '../styles/colors';
 
 import DecksView from '../components/DecksView';
 import AddDeck from '../components/AddDeck';
+import DeckDetails from '../components/DeckDetails';
 
 const Tabs = TabNavigator(
     {
@@ -13,14 +14,14 @@ const Tabs = TabNavigator(
             screen: DecksView,
             navigationOptions: {
                 tabBarLabel: 'Decks',
-                tabBarIcon: ({tintColor}) => <Icon name='archive' size={25} color={tintColor}/>,
+                tabBarIcon: ({tintColor}) => <Icon name='archive' size={35} color={tintColor}/>,
             }
         },
         AddDeck: {
             screen: AddDeck,
             navigationOptions: {
                 tabBarLabel: 'Add Deck',
-                tabBarIcon: ({tintColor}) => <Icon name='playlist-add' size={30} color={tintColor}/>,
+                tabBarIcon: ({tintColor}) => <Icon name='playlist-add' size={40} color={tintColor}/>,
             }
         }
     },
@@ -32,6 +33,7 @@ const Tabs = TabNavigator(
           activeTintColor: Platform.OS === 'ios' ? black : white,
           style: {
             height: 64,
+            paddingBottom: 10,
             backgroundColor: Platform.OS === 'ios' ? white : white,
             shadowColor: shadowColor,
             shadowOffset: {
@@ -49,7 +51,13 @@ const AppNavigator = StackNavigator(
     {
         Home: {
             screen: Tabs,
-        }
+        },
+        DeckDetails:{
+            screen: DeckDetails,
+            navigationOptions:{
+              header: false,
+            }
+        },
     }
 )
 
