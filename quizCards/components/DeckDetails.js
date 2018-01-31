@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {View, Text, StyleSheet, TouchableOpacity, Platform} from 'react-native'
 import {connect} from 'react-redux'
-import {white, black} from '../styles/colors'
+import {white, black, lightPurp} from '../styles/colors'
 import Deck from './Deck'
 
 class DeckDetails extends Component {
@@ -11,7 +11,7 @@ class DeckDetails extends Component {
     console.log('DECK Values', deck)
     return (
       <View style={styles.container}>
-        <Deck id={deck.title} title={deck.title} questions={deck.questions} bigFonts={true}/>
+        <Deck id={deck.title} title={deck.title} questions={deck.questions}/>
         <TouchableOpacity style={[styles.btn, styles.addCardBtn]} onPress={() => navigateToAddCard(deck.title)}>
           <Text style={[styles.btnText, styles.addCardBtnText]}>Add Card</Text>
         </TouchableOpacity>
@@ -31,8 +31,10 @@ const styles = StyleSheet.create({
   },
   btn: {
     padding: 10,
+    width: 295,
     height: 45,
-    margin: 10,
+    marginHorizontal: 25,
+    marginVertical: 10,
     justifyContent: 'center',
     ...Platform.select({
       ios: {
@@ -47,17 +49,19 @@ const styles = StyleSheet.create({
   },
   addCardBtn: {
     backgroundColor: white,
-    borderWidth: 1,
-    borderColor: black
+    borderWidth: 2,
+    borderColor: lightPurp
   },
   addCardBtnText: {
     color: black
   },
   startQuizBtn: {
-    backgroundColor: black
+    backgroundColor: white,
+    borderWidth: 2,
+    borderColor: lightPurp
   },
   startQuizBtnText: {
-    color: white
+    color: black
   },
   btnText: {
     color: white,
