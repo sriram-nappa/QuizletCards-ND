@@ -5,6 +5,10 @@ import {white, black, lightPurp} from '../styles/colors'
 import Deck from './Deck'
 
 class DeckDetails extends Component {
+  static navigationOptions = ({navigation}) => {
+    const {title} = navigation.state.params
+    return {title: title}
+  }
 
   render() {
     const {deck, navigateToAddCard, navigateToStartQuiz} = this.props
