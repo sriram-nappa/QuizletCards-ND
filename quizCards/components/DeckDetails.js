@@ -12,7 +12,6 @@ class DeckDetails extends Component {
 
   render() {
     const {deck, navigateToAddCard, navigateToStartQuiz} = this.props
-    console.log('DECK Values', deck)
     return (
       <View style={styles.container}>
         <Deck id={deck.title} title={deck.title} questions={deck.questions}/>

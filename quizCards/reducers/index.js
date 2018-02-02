@@ -14,11 +14,11 @@ function quizReducer(state = {}, action) {
     case ADD_DECK:
       {
         const deckObj = {
-          ...state,
-          [action.deckTitle]: {
-            title: action.deckTitle,
-            questions: []
-          }
+          ...state
+        }
+        deckObj.decks[action.deckTitle] = {
+          title: action.deckTitle,
+          questions: []
         }
         return deckObj
         break;

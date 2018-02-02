@@ -6,14 +6,60 @@ import {
     StyleSheet,
     Platform
 } from 'react-native';
-import {black, gray, lightPurp} from '../styles/colors';
+import {black, gray, lightPurp, white} from '../styles/colors';
 
 class FormWidget extends PureComponent {
     render() {
+        const {onCancel, onSubmit, submitBtnVal, cancelBtnVal} = this.props
         return (
-            <Text>'Cancel'</Text>
+          <View style={styles.formWrapper}>
+            <TouchableOpacity style={[styles.btnStyle]} onPress={onSubmit}>
+              <Text style={styles.btnTextStyle}>{submitBtnVal || 'Submit'}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.btnStyle, styles.cancelBtnStyle]} onPress={onCancel}>
+              <Text style={styles.btnTextStyle}>{cancelBtnVal || 'Cancel'}</Text>
+            </TouchableOpacity>
+          </View>
         )
     }
 }
 
-export default FormWidget
+export default FormWidget;
+
+const styles = StyleSheet.create({
+    formWrapper: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'center'
+    },
+    btnStyle: {
+      flex: 1,
+      backgroundColor: black,
+      padding: 10,
+      height: 45,
+      margin: 10,
+      justifyContent: 'center',
+      alignItems: 'center',
+      ...Platform.select({
+        ios: {
+          borderRadius: 7
+        },
+        android: {
+          paddingLeft: 30,
+          paddingRight: 30,
+          borderRadius: 2
+        }
+      })
+    },
+    cancelBtnStyle: {
+      backgroundColor: lightPurp
+    },
+    submitBtnStyle: {
+      backgroundColor: lightPurp,
+    },
+    btnTextStyle: {
+      fontSize: 22,
+      textAlign: 'center',
+      color: white
+    }
+  })

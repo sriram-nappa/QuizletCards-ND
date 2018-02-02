@@ -5,6 +5,7 @@ import {addDeck} from '../actions';
 import {saveDeck} from '../utils/api';
 import {NavigationActions} from 'react-navigation';
 import {black, gray, lightPurp} from '../styles/colors';
+import FormWidget from '../components/FormWidget';
 
 class AddDeck extends Component {
     constructor(props) {
@@ -15,15 +16,15 @@ class AddDeck extends Component {
     }
 
     goToHomePage = () => {
-        this.props.navigation.navigate('DeckDetails', {title: this.state.title})
+        this.props.navigation.navigate('DecksView', {title: this.state.title})
     }
 
     submitFn = () => {
         const {title} = this.state
         const {addDeck} = this.props
         if (title) {
-            addDeck(title)
             saveDeck(title)
+            addDeck(title)
             this.goToHomePage()
         }
     }
@@ -38,7 +39,7 @@ class AddDeck extends Component {
             <View style={styles.container}>
                 <Text style={styles.textLabel}>Enter a title for your new deck</Text>
                 <TextInput style={styles.title} editable={true} maxLength={50} placeholder="Title of your deck" onChangeText={(title) => this.setState({title})}/>
-                {/* <Form onSubmit={this.submitFn} onCancel={this.cancelFn} submitBtnText={'Add Deck'} cancelBtnText={'Cancel'}/> */}
+                <FormWidget onSubmit={this.submitFn} onCancel={this.cancelFn} submitBtnVal={'Add Deck'} cancelBtnVal={'Cancel'}/>
             </View>
         )
     }
@@ -68,7 +69,14 @@ const styles = StyleSheet.create({
     }
   })
 
-  function mapStateToProps(decks) {
+function mapStateToProps(decks) {
     return {decks}
-  }
-  export default connect(mapStateToProps, {addDeck})(AddDeck)
+}
+
+const mapDispatchToProps = (dispatch)=>{
+    return {
+      addDeck: (deckTitle)=>dispatch(addDeck(deckTitle))
+    }
+};
+
+export default connect(mapStateToProps, {addDeck})(AddDeck)

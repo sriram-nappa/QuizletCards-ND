@@ -18,8 +18,9 @@ export function getDeck(deckID) {
 
 export function saveDeck(deckTitle) {
   getDecks().then((decks) => {
-    if(!decks[deckTitle]) {
-      decks[deckTitle] = {
+    console.log(decks,"APIIII")
+    if(!decks.decks[deckTitle]) {
+      decks.decks[deckTitle] = {
         title: deckTitle,
         questions: [],
       }

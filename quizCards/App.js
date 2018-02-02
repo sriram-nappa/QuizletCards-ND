@@ -18,7 +18,6 @@ AppStatusBar = ({backgroundColor, ...props}) => {
 
 export default class App extends Component {
   render() {
-    console.log(quizReducer)
     return (
       <Provider store={createStore(quizReducer)}>  
         <View style={styles.container}>

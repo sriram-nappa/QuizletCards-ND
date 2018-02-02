@@ -5,7 +5,6 @@ import {black, gray, lightPurp} from '../styles/colors';
 class Deck extends Component {
   render() {
     const {title, questions} = this.props;
-    console.log(title, questions)
     let bigFonts = true;
     return (
       <View style={styles.container}>

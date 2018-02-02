@@ -15,10 +15,11 @@ class DecksView extends Component {
         }
         this.deckEventHandler = this.deckEventHandler.bind(this)
     }
-
+    
     componentDidMount() {
         getDecks().then((decks) => {
             this.props.loadDecks(decks)
+            console.log("LOADINGGGGGGGGGG")
         }).then(() => {
             this.setState({
                 loading: false
@@ -34,7 +35,6 @@ class DecksView extends Component {
 
     _renderItem = ({ item }) => {
         const { decks } = this.props.decks;
-        console.log("Item", decks)
         return (
           <TouchableOpacity
             onPress={() => this.deckEventHandler(decks, item)}
@@ -46,6 +46,7 @@ class DecksView extends Component {
 
     render () {
         const { deckIds, decks } = this.props.decks;
+        console.log(this.props, "PROPS HEREERERERE*****************************")
         return (
             <View style={{flex: 1, marginTop: 15}}>
                 {
