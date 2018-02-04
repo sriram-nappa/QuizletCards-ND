@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Text, View, FlatList, TouchableOpacity } from 'react-native';
-import { getDecks } from '../utils/api';
+import { getDecks, clearStorage } from '../utils/api';
 import { loadDecks } from '../actions';
 import { AppLoading } from 'expo'
 
@@ -27,6 +27,11 @@ class DecksView extends Component {
         })
     }
     
+    shouldComponentUpdate(nextProps, nextState) {
+        const {decks} = this.props.decks
+        return true
+    }
+
     deckEventHandler = (decks, item) => {
         this.props.navigation.navigate('DeckDetails', {deck : decks[item], title: item})
     }
@@ -45,15 +50,15 @@ class DecksView extends Component {
     }
 
     render () {
-        const { deckIds, decks } = this.props.decks;
-        console.log(this.props, "PROPS HEREERERERE*****************************")
+        const { decks } = this.props.decks;
+        console.log("**************RENDERRRR***************", this.props.decks)
         return (
             <View style={{flex: 1, marginTop: 15}}>
                 {
                 (this.state.loading) ? 
                     <AppLoading/> :
                     <FlatList
-                        data={deckIds}
+                        data={Object.keys(decks)}
                         extraData={decks}
                         renderItem={this._renderItem}
                         keyExtractor={this._keyExtractor}

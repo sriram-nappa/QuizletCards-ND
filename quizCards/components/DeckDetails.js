@@ -75,7 +75,6 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(decks, {navigation}) {
   const {deck, title} = navigation.state.params
-  console.log('Navigation', decks)
   return {
     deck: deck || {},
     decks: decks

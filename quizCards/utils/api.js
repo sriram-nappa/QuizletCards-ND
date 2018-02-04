@@ -18,7 +18,6 @@ export function getDeck(deckID) {
 
 export function saveDeck(deckTitle) {
   getDecks().then((decks) => {
-    console.log(decks,"APIIII")
     if(!decks.decks[deckTitle]) {
       decks.decks[deckTitle] = {
         title: deckTitle,
@@ -31,8 +30,8 @@ export function saveDeck(deckTitle) {
 
 export function addCard(deckTitle, cardVal) {
   getDecks().then((decks) => {
-    if(decks[deckTitle] && decks[deckTitle].questions) {
-      decks[deckTitle]['questions'].push(cardVal)
+    if(decks.decks[deckTitle] && decks.decks[deckTitle].questions) {
+      decks.decks[deckTitle]['questions'].push(cardVal)
     }
     AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decks))
   })
