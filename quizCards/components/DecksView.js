@@ -19,7 +19,6 @@ class DecksView extends Component {
     componentDidMount() {
         getDecks().then((decks) => {
             this.props.loadDecks(decks)
-            console.log("LOADINGGGGGGGGGG")
         }).then(() => {
             this.setState({
                 loading: false
@@ -51,7 +50,6 @@ class DecksView extends Component {
 
     render () {
         const { decks } = this.props.decks;
-        console.log("**************RENDERRRR***************", this.props.decks)
         return (
             <View style={{flex: 1, marginTop: 15}}>
                 {

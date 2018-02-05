@@ -7,6 +7,7 @@ import { lightPurp, white, black, blue, shadowColor } from '../styles/colors';
 import DecksView from '../components/DecksView';
 import AddDeck from '../components/AddDeck';
 import DeckDetails from '../components/DeckDetails';
+import AddCard from '../components/AddCard';
 
 const Tabs = TabNavigator(
     {
@@ -58,6 +59,13 @@ const AppNavigator = StackNavigator(
               header: false,
             }
         },
+        AddCard:{
+            screen: AddCard,
+            navigationOptions: {
+                header: false,
+                title: "Add Card"
+            }
+        }
     }
 )
 

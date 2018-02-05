@@ -28,7 +28,7 @@ export function saveDeck(deckTitle) {
   })
 }
 
-export function addCard(deckTitle, cardVal) {
+export function addCardAPI(deckTitle, cardVal) {
   getDecks().then((decks) => {
     if(decks.decks[deckTitle] && decks.decks[deckTitle].questions) {
       decks.decks[deckTitle]['questions'].push(cardVal)

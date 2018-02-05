@@ -10,14 +10,14 @@ import {black, gray, lightPurp, white} from '../styles/colors';
 
 class FormWidget extends PureComponent {
     render() {
-        const {onCancel, onSubmit, submitBtnVal, cancelBtnVal} = this.props
+        const {onCancel, onSubmit, submitBtnText, cancelBtnText} = this.props
         return (
           <View style={styles.formWrapper}>
             <TouchableOpacity style={[styles.btnStyle]} onPress={onSubmit}>
-              <Text style={styles.btnTextStyle}>{submitBtnVal || 'Submit'}</Text>
+              <Text style={styles.btnTextStyle}>{submitBtnText || 'Submit'}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.btnStyle, styles.cancelBtnStyle]} onPress={onCancel}>
-              <Text style={styles.btnTextStyle}>{cancelBtnVal || 'Cancel'}</Text>
+              <Text style={styles.btnTextStyle}>{cancelBtnText || 'Cancel'}</Text>
             </TouchableOpacity>
           </View>
         )

@@ -11,14 +11,14 @@ class DeckDetails extends Component {
   }
 
   render() {
-    const {deck, navigateToAddCard, navigateToStartQuiz} = this.props
+    const {deck, goToAddCard, goToStartQuiz} = this.props
     return (
       <View style={styles.container}>
         <Deck id={deck.title} title={deck.title} questions={deck.questions}/>
-        <TouchableOpacity style={[styles.btn, styles.addCardBtn]} onPress={() => navigateToAddCard(deck.title)}>
+        <TouchableOpacity style={[styles.btn, styles.addCardBtn]} onPress={() => goToAddCard(deck.title)}>
           <Text style={[styles.btnText, styles.addCardBtnText]}>Add Card</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.btn, styles.startQuizBtn]} onPress={() => navigateToStartQuiz(deck.title)}>
+        <TouchableOpacity style={[styles.btn, styles.startQuizBtn]} onPress={() => goToStartQuiz(deck.title)}>
           <Text style={[styles.btnText, styles.startQuizBtnText]}>Start Quiz</Text>
         </TouchableOpacity>
       </View>
@@ -86,8 +86,8 @@ function mapDispatchToProps(dispatch, {navigation}) {
 
   return {
     goBack: () => navigation.goBack(),
-    navigateToAddCard: (deckTitle) => navigation.navigate('AddCard', {deckTitle: deckTitle}),
-    navigateToStartQuiz: (deckTitle) => navigation.navigate('Quiz', {deckTitle: deckTitle})
+    goToAddCard: (deckTitle) => navigation.navigate('AddCard', {deckTitle: deckTitle}),
+    goToStartQuiz: (deckTitle) => navigation.navigate('Quiz', {deckTitle: deckTitle})
   }
 
 }
