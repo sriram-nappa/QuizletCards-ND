@@ -29,7 +29,6 @@ function quizReducer(state = {}, action) {
         const cardObj = {
           ...state
         }
-        console.log("In Action", action.card)
         if (cardObj.decks[action.deckTitle]) {
           const {cardQuestion, cardAnswer} = action.card
           cardObj.decks[action.deckTitle].questions.push({

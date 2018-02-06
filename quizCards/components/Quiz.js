@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, Platform, TouchableOpacity } from 'react-native';
 import FormWidget from '../components/FormWidget';
 import {connect} from 'react-redux';
-import {setLocalNotification} from '../utils/notification';
 import {black, gray, lightPurp, white} from '../styles/colors';
 
 class Quiz extends Component {
@@ -78,7 +77,6 @@ class Quiz extends Component {
         const {decks, deck, goBackToDeck, deckTitle} = this.props
         const {cardIndex, quizCompletion, totalCorrectAns, totalIncorrectAns, showQuestion} = this.state
         const { question, answer } = deck.questions[cardIndex]
-        console.log("QUIZ VIEW HERE", decks, " ------- ", deck, " ------------ ", showQuestion)
         const totalQuestionLen = decks[deckTitle].questions.length
 
         let viewContainer = (quizCompletion) ?
@@ -92,7 +90,7 @@ class Quiz extends Component {
             (
                 <View style={styles.cardContainer}>
                     <View style={styles.titleWrapper}>
-                        <Text style={styles.title}>{showQuestion ? question : answer}</Text>
+                        <Text numberOfLines={3} style={styles.title}>{showQuestion ? question : answer}</Text>
                     </View>
                     <TouchableOpacity style={[styles.answerBtn]} onPress={this.flipCard}>
                         <Text style={styles.txtStyle}>{showQuestion ? 'Answer' : 'Question'}</Text>
@@ -158,20 +156,18 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     buttonsContainer: {
-      flex: 4,
+      flex: 2,
       justifyContent: 'center',
       alignItems: 'center',
     },
     titleWrapper: {
-        width: 200,
-        flexGrow: 1,
-        flex: 1,
+        flex: 6,
     },
     title: {
-      flex: 1,
-      flexWrap: 'wrap',
-      fontSize: 30,
+      flex: 5,
+      fontSize: 25,
       textAlign: 'center',
+      flexWrap: 'wrap',
     },
     subTitle: {
       fontSize: 30,

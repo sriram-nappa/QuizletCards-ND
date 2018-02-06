@@ -7,6 +7,7 @@ import { lightPurp, blue } from './styles/colors';
 import quizReducer from './reducers';
 import initState from './utils/initialState';
 import AppNavigator from './utils/navigator';
+import {setLocalNotification, clearLocalNotification} from './utils/notification';
 
 AppStatusBar = ({backgroundColor, ...props}) => {
   return (
@@ -17,6 +18,11 @@ AppStatusBar = ({backgroundColor, ...props}) => {
 }
 
 export default class App extends Component {
+  componentDidMount() {
+    clearLocalNotification()
+    setLocalNotification()
+  }
+
   render() {
     return (
       <Provider store={createStore(quizReducer)}>  

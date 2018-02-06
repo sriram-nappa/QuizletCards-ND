@@ -20,9 +20,7 @@ class AddCard extends Component {
 
     submitFn() {
         const {deck, addCard} = this.props
-        console.log("This Props", this.props)
         const {cardQuestion, cardAnswer} = this.state
-        console.log("IN")
         if(cardQuestion && cardAnswer) {
             addCard(deck.title, {cardQuestion, cardAnswer})
             addCardAPI(deck.title, {cardQuestion,cardAnswer})
@@ -37,7 +35,6 @@ class AddCard extends Component {
 
     render() {
         const {deck} = this.props
-        console.log("DECK", deck)
         return (
         <View style={styles.container}>
             <Text style={styles.title}>{deck.title}</Text>
@@ -84,7 +81,6 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(decks, {navigation}) {
     const {deckTitle} = navigation.state.params
-    console.log("DECKSOBJ", decks)
     return {
         deck: decks.decks[deckTitle] || {}
     }
