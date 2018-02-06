@@ -56,6 +56,8 @@ The project uses the following dependencies:
 * React-Navigation
 * Expo
 
+Optimized for both iOS and Android.
+
 ## Authors
 
 Sriram Poondi Chinappa
