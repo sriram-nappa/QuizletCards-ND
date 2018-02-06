@@ -1,6 +1,9 @@
 # QuizletCards (FlashCards)
 This is my version of *Flashcards* project for Udacity React Nano degree.
 
+# Description
+A mobile application that allows users to study collections of flashcards. The app will allow users to create different categories of flashcards called "decks", add flashcards to those decks, then take quizzes on those decks. Optimized for both iOS and Android.
+
 ### Table of Contents
 * [Getting Started](#getting-started)
 * [Prerequisites](#prerequisites)
@@ -55,8 +58,6 @@ The project uses the following dependencies:
 * Redux
 * React-Navigation
 * Expo
-
-Optimized for both iOS and Android.
 
 ## Authors
 
