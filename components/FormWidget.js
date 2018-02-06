@@ -16,9 +16,13 @@ class FormWidget extends PureComponent {
             <TouchableOpacity style={[styles.btnStyle]} onPress={onSubmit}>
               <Text style={styles.btnTextStyle}>{submitBtnText || 'Submit'}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.btnStyle, styles.cancelBtnStyle]} onPress={onCancel}>
-              <Text style={styles.btnTextStyle}>{cancelBtnText || 'Cancel'}</Text>
-            </TouchableOpacity>
+            {
+              (cancelBtnText && onCancel) ? 
+                <TouchableOpacity style={[styles.btnStyle, styles.cancelBtnStyle]} onPress={onCancel}>
+                  <Text style={styles.btnTextStyle}>{cancelBtnText || 'Cancel'}</Text>
+                </TouchableOpacity>
+              : null
+            }
           </View>
         )
     }

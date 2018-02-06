@@ -19,19 +19,19 @@ class AddDeck extends Component {
         this.props.navigation.navigate('DecksView', {title: this.state.title})
     }
 
+    goToDeckDetails = () => {
+        const {decks} = this.props.decks
+        this.props.navigation.navigate('DeckDetails', {deckTitle: this.state.title, deck: decks[this.state.title]})
+    }
+
     submitFn = () => {
         const {title} = this.state
         const {addDeck} = this.props
         if (title) {
             saveDeck(title)
             addDeck(title)
-            this.goToHomePage()
+            this.goToDeckDetails()
         }
-    }
-
-    cancelFn = () => {
-        this.setState({title: ""})
-        this.goToHomePage()
     }
 
     render () {
@@ -39,7 +39,7 @@ class AddDeck extends Component {
             <View style={styles.container}>
                 <Text style={styles.textLabel}>Enter a title for your new deck</Text>
                 <TextInput style={styles.title} editable={true} maxLength={50} placeholder="Title of your deck" onChangeText={(title) => this.setState({title})}/>
-                <FormWidget onSubmit={this.submitFn} onCancel={this.cancelFn} submitBtnVal={'Add Deck'} cancelBtnVal={'Cancel'}/>
+                <FormWidget onSubmit={this.submitFn} submitBtnVal={'Add Deck'}/>
             </View>
         )
     }
