@@ -24,6 +24,7 @@ class DecksView extends Component {
                 loading: false
             })
         })
+        // clearStorage()
     }
     
     shouldComponentUpdate(nextProps, nextState) {
