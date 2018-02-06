@@ -32,11 +32,11 @@ const Tabs = TabNavigator(
           header: null
         },
         tabBarOptions: {
-          activeTintColor: Platform.OS === 'ios' ? black : white,
+          activeTintColor: Platform.OS === 'ios' ? black : black,
           style: {
             height: 64,
             paddingBottom: 10,
-            backgroundColor: Platform.OS === 'ios' ? white : white,
+            backgroundColor: Platform.OS === 'ios' ? white : lightPurp,
             shadowColor: shadowColor,
             shadowOffset: {
               width: 0,

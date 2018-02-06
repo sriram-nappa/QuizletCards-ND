@@ -36,17 +36,17 @@ const styles = StyleSheet.create({
     padding: 10,
     width: 295,
     height: 45,
-    marginHorizontal: 25,
     marginVertical: 10,
+    alignContent: 'center',
     justifyContent: 'center',
     ...Platform.select({
       ios: {
-        borderRadius: 7
+        borderRadius: 7,
+        marginHorizontal: 25,
       },
       android: {
-        paddingLeft: 30,
-        paddingRight: 30,
-        borderRadius: 2
+        borderRadius: 2,
+        marginHorizontal: 40
       }
     })
   },
