@@ -1,7 +1,7 @@
 import React from 'react';
 import { TabNavigator, StackNavigator, TabBarBottom } from 'react-navigation';
 import { Text, View, Platform } from 'react-native';
-import { Icon } from 'react-native-elements'
+import { Ionicons } from '@expo/vector-icons';
 import { lightPurp, white, black, blue, shadowColor } from '../styles/colors';
 
 import DecksView from '../components/DecksView';
@@ -16,14 +16,14 @@ const Tabs = TabNavigator(
             screen: DecksView,
             navigationOptions: {
                 tabBarLabel: 'Decks',
-                tabBarIcon: ({tintColor}) => <Icon name='archive' size={35} color={tintColor}/>,
+                tabBarIcon: ({tintColor}) => <Ionicons name="md-card" size={32} color={tintColor} />,
             }
         },
         AddDeck: {
             screen: AddDeck,
             navigationOptions: {
                 tabBarLabel: 'Add Deck',
-                tabBarIcon: ({tintColor}) => <Icon name='playlist-add' size={40} color={tintColor}/>,
+                tabBarIcon: ({tintColor}) => <Ionicons name="md-add" size={32} color={tintColor} />,
             }
         }
     },
